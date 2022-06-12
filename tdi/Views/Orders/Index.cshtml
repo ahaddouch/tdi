@@ -6,7 +6,7 @@
 }
 
 <h2>Index</h2>
-<form asp-controller="Customers" asp-action="index" method="post">
+<form asp-controller="Orders" asp-action="Index" method="post">
     <select name="selectedCus">
         <option value="all">All orders</option>
         @foreach (Customers c in ViewBag.customers)
@@ -14,7 +14,7 @@
             <option @(ViewBag.selected == c.CustomerID ? "selected" : "") value="@c.CustomerID">@c.CompanyName  -  @c.ContactName</option>
         }
     </select>
-    <input type="submit" name="btnfind" />
+    <input type="submit" />
 </form>
 <p>
     @Html.ActionLink("Create New", "Create")

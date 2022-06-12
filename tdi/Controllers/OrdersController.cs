@@ -18,13 +18,17 @@ namespace tdi.Controllers
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.Customers);
+            ViewBag.customers = db.Customers.ToList();
             return View(orders.ToList());
         }
 
         [HttpPost]
-        public ActionResult Index()
+        public ActionResult Index(string selectedCus)
         {
-            var orders = db.Orders.Include(o => o.Customers);
+            IQueryable<Orders> orders = db.Orders;
+            if (selectedCus != "all") orders = orders.Where(r => r.CustomerID.Equals(selectedCus));
+            ViewBag.customers = db.Customers.ToList();
+            ViewBag.selected = selectedCus;
             return View(orders.ToList());
         }
 
